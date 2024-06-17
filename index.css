@@ -6,56 +6,60 @@
 
 body {
   background: #191919;
-}
-
-div {
-  /* background: #5dbcf9; */
+  height: 100vh;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
 }
 
 #speaker,
 #sound {
-  position: absolute;
-  inset: 0;
-  margin: auto;
-  width: 0;
-  height: 0;
-  /* rotate: 45deg; */
-}
-#speaker {
-  left: -100px;
-  /* border-top: 140px solid transparent; */
-  border-top: 150px solid transparent;
-  border-right: 200px solid #5dbcf9;
-  border-bottom: 150px solid transparent;
+  align-self: center;
+  width: 200px;
+  height: 200px;
+  position: relative;
+  background: transparent;
 }
 
 #speaker::before {
   content: "";
   position: absolute;
-  height: 100px;
-  width: 100px;
-  background-color: #5dbcf9;
-  top: -50px;
-  border-radius: 10px 0 0 10px;
+  right: 0;
+  border-top: 100px solid transparent;
+  border-right: 200px solid #5dbcf9;
+  border-bottom: 100px solid transparent;
+  z-index: 2;
 }
 
-#sound {
-  width: 200px;
-  height: 100px;
-  scale: 1.15;
-  border-radius: 100px 100px 0 0;
-  rotate: 90deg;
-  right: -350px;
-  box-shadow: 0 0 0 10px #5dbcf9, 0 0 0 20px #191919, 0 0 0 30px #5dbcf9,
-    0 0 0 40px #191919, 0 0 0 50px #5dbcf9;
+#speaker::after {
+  --size: 60px;
+  content: "";
+  position: absolute;
+  left: 0;
+  height: var(--size);
+  width: calc(var(--size) * 1.5);
+  background-color: #5dbcf9;
+  top: calc(var(--size) + 10px);
+  border-radius: 5px;
 }
 
 #sound::before {
   content: "";
   position: absolute;
-  width: 350px;
-  height: 52px;
-  bottom: -50px;
-  right: -60px;
+  height: calc(200px - 0px);
+  width: calc(200px - 0px);
+  left: -85px;
+  border-radius: 50%;
+  box-shadow: inset 0px 0px 0px 10px #5dbcf9, inset 0px 0px 0px 20px #191919,
+    inset 0px 0px 0px 30px #5dbcf9, inset 0px 0px 0px 40px #191919,
+    inset 0px 0px 0px 50px #5dbcf9, inset 0px 0px 0px 60px #191919;
+}
+
+#sound::after {
+  content: "";
+  position: absolute;
+  height: calc(200px - 0px);
+  width: calc(20px - 0px);
   background-color: #191919;
+  left: -10px;
 }
