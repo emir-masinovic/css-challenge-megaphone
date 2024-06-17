@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+:root {
+  --speaker-size: 200px;
+  --sound-size: calc(var(--speaker-size) * 2);
+}
+
 body {
   background: #191919;
   height: 100vh;
@@ -12,54 +17,63 @@ body {
   justify-content: center;
 }
 
+/* For positioning */
 #speaker,
 #sound {
   align-self: center;
   width: 200px;
-  height: 200px;
+  height: calc(var(--speaker-size) * 2);
   position: relative;
-  background: transparent;
 }
 
+/* Triangle part */
 #speaker::before {
   content: "";
   position: absolute;
+  background-color: #191919;
   right: 0;
-  border-top: 100px solid transparent;
+  border-top: var(--speaker-size) solid transparent;
   border-right: 200px solid #5dbcf9;
-  border-bottom: 100px solid transparent;
+  border-bottom: var(--speaker-size) solid transparent;
   z-index: 2;
 }
 
+/* Back part */
 #speaker::after {
-  --size: 60px;
+  --back-part-size: calc(var(--speaker-size) / 2);
+  --back-part-offset: calc(var(--speaker-size) / 4);
+
   content: "";
   position: absolute;
-  left: 0;
-  height: var(--size);
-  width: calc(var(--size) * 1.5);
   background-color: #5dbcf9;
-  top: calc(var(--size) + 10px);
+  left: 0;
+  height: var(--back-part-size);
+  width: calc(var(--back-part-size) * 1.5);
+  top: calc(var(--back-part-size) + var(--back-part-offset));
   border-radius: 5px;
+  z-index: 2;
 }
 
+/* Rings */
 #sound::before {
+  --rings-offset: calc(var(--speaker-size) / 1.1);
   content: "";
   position: absolute;
-  height: calc(200px - 0px);
-  width: calc(200px - 0px);
-  left: -85px;
+  height: var(--sound-size);
+  width: var(--sound-size);
+  left: calc(var(--rings-offset) * -1);
   border-radius: 50%;
   box-shadow: inset 0px 0px 0px 10px #5dbcf9, inset 0px 0px 0px 20px #191919,
     inset 0px 0px 0px 30px #5dbcf9, inset 0px 0px 0px 40px #191919,
     inset 0px 0px 0px 50px #5dbcf9, inset 0px 0px 0px 60px #191919;
 }
 
+/* Cuts the rings */
 #sound::after {
   content: "";
   position: absolute;
-  height: calc(200px - 0px);
-  width: calc(20px - 0px);
+  height: var(--sound-size);
+  width: calc(var(--sound-size) / 10);
   background-color: #191919;
   left: -10px;
 }
